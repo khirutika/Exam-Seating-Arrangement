@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Department Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Department {{ dept_id }} Details</h1>
+
+    <form method="POST" action="">
+        <label for="department_name">Department Name:</label>
+        <input type="text" name="department_name" required><br>
+
+        <label for="start_register_number">Starting Register Number:</label>
+        <input type="number" name="start_register_number" required><br>
+
+        <label for="end_register_number">Ending Register Number:</label>
+        <input type="number" name="end_register_number" required><br>
+
+        <label for="lateral_entry">Do you have lateral entry students?</label>
+        <select name="lateral_entry" id="lateral_entry" onchange="toggleLateralInput()" required>
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+        </select><br>
+
+        <div id="lateral_entry_input" style="display: none;">
+            <label for="lateral_numbers">Enter Lateral Entry Register Numbers (comma-separated):</label>
+            <input type="text" name="lateral_numbers">
+        </div>
+
+        <br>
+        <button type="submit">Next</button>
+    </form>
+
+    <script>
+        function toggleLateralInput() {
+            const lateralEntry = document.getElementById("lateral_entry").value;
+            const inputDiv = document.getElementById("lateral_entry_input");
+            inputDiv.style.display = (lateralEntry === 'yes') ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>
+
+
+

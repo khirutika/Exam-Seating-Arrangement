@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Seating Arrangement</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Final Seating Arrangement</h1>
+
+    {% if halls %}
+        {% for hall_id, hall in halls.items() %}
+        <div class="hall">
+            <h2>Hall {{ hall_id }}</h2>
+
+            <p><strong>Teacher In-Charge:</strong> 
+                {% if hall_id in hall_teachers %}
+                    {{ hall_teachers[hall_id]['teacher_name'] }} ({{ hall_teachers[hall_id]['teacher_department'] }})
+                {% else %}
+                    Not Assigned
+                {% endif %}
+            </p>
+
+            {% if hall['students'] %}
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Seat Number</th>
+                        <th>Register Number</th>
+                        <th>Department</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in hall['students'] %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ student['register_number'] }}</td>
+                        <td>{{ student['department'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+                <p>No students assigned for this hall.</p>
+            {% endif %}
+
+            <hr>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>No halls available for seating arrangement.</p>
+    {% endif %}
+
+    <a href="{{ url_for('index') }}">Back to Home</a> |
+    <a href="{{ url_for('clear_data') }}">Reset Data</a>
+</body>
+</html>
+
+
+
+
+
+

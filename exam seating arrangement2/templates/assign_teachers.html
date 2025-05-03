@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assign Teachers</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Assign Teachers to Halls</h1>
+
+    <form method="POST" action="{{ url_for('assign_teachers') }}">
+        {% for hall_id in halls.keys() %}
+        <h2>Hall {{ hall_id }}</h2>
+        <label for="teacher_name_{{ hall_id }}">Teacher Name:</label>
+        <input type="text" name="teacher_name[]" required><br>
+
+        <label for="teacher_department_{{ hall_id }}">Department:</label>
+        <input type="text" name="teacher_department[]" required><br><br>
+        {% endfor %}
+
+        <button type="submit">Submit and View Seating</button>
+    </form>
+
+    <br>
+    <a href="{{ url_for('index') }}">Back to Home</a>
+</body>
+</html> 
+
+
